@@ -9,18 +9,7 @@ class App {
 
 	async start() {
 		const app = new Koa();
-
-		app
-			// .use(router.route)
-			// .use(router.allowedMethods());
-			.use(ctx => {
-				const body = {
-					response: 'OK'
-				};
-				ctx.body = body;
-				ctx.status = 200;
-				console.log(ctx);
-			})
+		app.use(router)
 
 		this.server = await new Promise((resolve, reject) => {
 			const srv = app.listen(this.port);
@@ -28,7 +17,7 @@ class App {
 			srv.on('listening', () => {
 				resolve(srv);
 			});
-	  
+
 			srv.on('error', (err) => {
 				reject(err);
 			});
@@ -42,7 +31,7 @@ class App {
 			if (err) {
 				reject(err);
 			}
-	  
+
 			  resolve();
 			});
 		});

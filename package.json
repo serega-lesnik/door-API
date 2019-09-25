@@ -14,7 +14,7 @@
   "dependencies": {
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
-    "koa": "^2.8.1",
-    "koa-router": "^7.4.0"
+    "impress-router": "^1.6.0",
+    "koa": "^2.8.1"
   }
 }
