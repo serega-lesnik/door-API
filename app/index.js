@@ -1,5 +1,7 @@
 const Koa = require('koa');
+const config = require('./config');
 const router = require('./router');
+const db = require('./config/db');
 
 class App {
 	constructor(port = 3000) {
@@ -9,6 +11,9 @@ class App {
 
 	async start() {
 		const app = new Koa();
+
+		app.context.config = config;
+		app.context.db = db;
 		app.use(router)
 
 		this.server = await new Promise((resolve, reject) => {
