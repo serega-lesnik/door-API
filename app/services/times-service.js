@@ -6,8 +6,8 @@ class TimesService {
 		this.config = config;
 	}
 
-	async getTimesForAllUsers() {
-		const data = await this.timesModel.getTimesForAllUsers();
+	async getTimesForAllUsers(payload) {
+		const data = await this.timesModel.getTimesForAllUsers(payload);
 		return data;
 	}
 }

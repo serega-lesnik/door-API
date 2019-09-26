@@ -1,10 +1,10 @@
 SELECT
-	t_b_IDCard.f_CardNO,
-	t_b_Consumer.f_ConsumerNO,
-	t_b_Consumer.f_ConsumerName,
-	t_b_Group.f_GroupName,
-	t_d_CardRecord.f_ReadDate,
-	t_b_Reader.f_ReaderName
+	t_b_IDCard.f_CardNO AS cardNO,
+	t_b_Consumer.f_ConsumerNO AS consumerNO,
+	t_b_Consumer.f_ConsumerName AS consumerName,
+	t_b_Group.f_GroupName AS groupName,
+	t_d_CardRecord.f_ReadDate AS readDate,
+	t_b_Reader.f_ReaderName AS readerName
 FROM (
 	(
 		(
@@ -20,4 +20,5 @@ FROM (
 )
 INNER JOIN t_b_Reader
 ON t_d_CardRecord.f_ReaderID = t_b_Reader.f_ReaderID
+WHERE (t_d_CardRecord.f_ReadDate BETWEEN #9/1/2019# AND #9/2/2019 23:59:59#)
 ORDER BY t_d_CardRecord.f_ReadDate;

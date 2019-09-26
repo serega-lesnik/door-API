@@ -6,6 +6,7 @@ const db = require('./config/db');
 class App {
 	constructor(port = 3000) {
 		this.port = port;
+		this.host = '0.0.0.0'
 		this.server = null;
 	}
 
@@ -17,7 +18,7 @@ class App {
 		app.use(router)
 
 		this.server = await new Promise((resolve, reject) => {
-			const srv = app.listen(this.port);
+			const srv = app.listen(this.port, this.host);
 
 			srv.on('listening', () => {
 				resolve(srv);
@@ -27,7 +28,7 @@ class App {
 				reject(err);
 			});
 		});
-		console.log(`Server started on http://localhost:${this.port}`);
+		console.log(`Server started on http://${this.host}:${this.port}`);
 	}
 
 	async close() {
