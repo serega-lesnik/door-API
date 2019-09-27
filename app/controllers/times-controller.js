@@ -1,3 +1,4 @@
+const moment = require('moment');
 const TimesService = require('../services/times-service');
 
 const { HTTP_STATUS_CODES } = require('../constants');
@@ -33,7 +34,7 @@ module.exports = {
 	 *
 	 */
 	async getTimesForAllUsers(ctx) {
-		console.log('--- controller:', ctx.query)
+		console.log('--- controller GET:',moment().format('YYYY-MM-DD HH:mm:ss'), ctx.query)
 		const body = {};
 		const currentDate = new Date();
 		let {
