@@ -1,3 +1,4 @@
+[<<< Back to README file](../README.md)
 ## API Docs
 
 ### Table of Contents
@@ -45,3 +46,5 @@ Content-Type: application/json; charset=utf-8
 	"response": "OK"
 }
 ```
+
+[<<< Back to README file](../README.md)
