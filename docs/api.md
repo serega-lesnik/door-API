@@ -11,17 +11,16 @@
 ### All customers
 
 Получение данных о всех сотрудниках за последнюю неделю:
-```
-http://192.168.19.113:3000/api/v1/times
+```bash
+curl http://192.168.19.113:3000/api/v1/times
 ```
 Может принимать параметры:
-```
-startDate
-endDate
-```
+- `startDate` <[Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)>
+- `endDate` <[Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)>
+
 Например:
-```
-http://192.168.19.113:3000/api/v1/times?startDate=2019-09-02&endDate=2019-09-15
+```bash
+curl http://192.168.19.113:3000/api/v1/times?startDate=2019-09-02&endDate=2019-09-15
 ```
 Ответ предоставляется в формате **JSON**
 ```
