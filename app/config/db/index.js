@@ -12,7 +12,7 @@ const {
 
 const config = {
 	nodeEnv,
-	pathToDbFile
+	pathToDbFile,
 };
 
 console.log(pathToDbFile)

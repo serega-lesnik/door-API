@@ -3,10 +3,10 @@
 	t_b_Consumer.f_ConsumerNO,
 	t_b_Consumer.f_ConsumerName,
 	t_b_Group.f_GroupName,
-	FormatDateTime([t_d_CardRecord.f_ReadDate],2) AS DateOnly,
-	FormatDateTime(Min(f_ReadDate), 4) AS StartTime,
-	FormatDateTime(Max(f_ReadDate), 4) AS EndTime,
-	DateDiff("n", Min(f_ReadDate), Max(f_ReadDate)) AS DiffDate
+	-- FormatDateTime([t_d_CardRecord.f_ReadDate],2) AS DateOnly,
+	Min(f_ReadDate) AS StartTime,
+	Max(f_ReadDate) AS EndTime,
+	-- DateDiff("n", Min(f_ReadDate), Max(f_ReadDate)) AS DiffDate
 FROM
 	(
 		(
@@ -23,7 +23,7 @@ FROM
 	)
 	INNER JOIN t_b_Reader
 	ON t_d_CardRecord.f_ReaderID = t_b_Reader.f_ReaderID
-WHERE ((t_b_Consumer.f_ConsumerNO)=40)
+WHERE (((t_d_CardRecord.f_ReadDate) Between #9/1/2019# And #9/2/2019 23:59:59#))
 GROUP BY
 	t_b_IDCard.f_CardNO,
 	t_b_Consumer.f_ConsumerNO,
