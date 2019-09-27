@@ -1,7 +1,7 @@
 {
   "name": "doorApi",
   "version": "1.0.0",
-  "description": "",
+  "description": "API server for door keys",
   "main": "index.js",
   "scripts": {
     "start": "node  index.js",
