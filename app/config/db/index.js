@@ -8,14 +8,14 @@ if (process.env.NODE_ENV === undefined) {
 const {
 	NODE_ENV: nodeEnv,
 	PATH_TO_DB_FILE: pathToDbFile,
+	DB_PASSWORD: dbPassword,
 } = process.env;
 
 const config = {
 	nodeEnv,
 	pathToDbFile,
+	dbPassword,
 };
-
-console.log(pathToDbFile)
 
 const db = accessConnection(config);
 

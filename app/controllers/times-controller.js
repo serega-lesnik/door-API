@@ -22,7 +22,6 @@ const dateValidator = ctx => {
 		endDate = moment();
 	} else {
 		endDate = moment(endDate);
-		console.log('end Date:', endDate)
 		if (!endDate.isValid()) {
 			ctx.checkQuery('endDate').addError('endDate is not a date format.');
 			return false;
