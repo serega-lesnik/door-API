@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "impress-router": "^1.6.0",
     "koa": "^2.8.1",
+    "koa-validate": "^1.0.7",
     "moment": "^2.24.0",
     "node-adodb": "^5.0.2",
     "require-sql": "^1.0.0"

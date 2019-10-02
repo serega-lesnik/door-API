@@ -1,5 +1,6 @@
 const Koa = require('koa');
 const cors = require('@koa/cors');
+const koaValidate = require('koa-validate');
 const config = require('./config');
 const router = require('./router');
 const db = require('./config/db');
@@ -17,6 +18,7 @@ class App {
 		app.context.config = config;
 		app.context.db = db;
 		app.use(cors());
+		koaValidate(app);
 		app.use(router);
 
 		this.server = await new Promise((resolve, reject) => {
