@@ -13,7 +13,7 @@ const {
 const DATE_FORMAT_FOR_QUERY = 'YYYY-MM-DD';
 
 const dateValidator = ctx => {
-	const {
+	let {
 		startDate = null,
 		endDate = null,
 	} = ctx.query;
