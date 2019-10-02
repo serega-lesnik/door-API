@@ -20,31 +20,43 @@ class TimesService {
 	}
 
 	_reduceByUserAndDate(arr) {
-		const unicSignatures = new Set();
+		const unicUsers = new Set();
+		const unicDates = new Set();
 		const completteArr = arr.map(item => {
 			item.date = item.readDate.substring(0, 10);
-			const signature = `${item.date}|${item.consumerNO}`;
-			item.signature = signature;
 			item.moment = moment(item.readDate);
-			unicSignatures.add(signature);
+			unicUsers.add(item.consumerNO);
+			unicDates.add(item.date);
 			return item;
 		});
 
-		const res = [];
-		unicSignatures.forEach(signature => {
+		const usersArray = [...unicUsers].sort();
+		const users = usersArray.map(user => {
 			const usersFields = completteArr.filter(el => (
-				el.signature === signature
+				el.consumerNO === user
 			));
-			const miniMax = this._getMiniMaxDate(usersFields);
-			res.push({
+			const userReduce = {
 				consumerNO: usersFields[0].consumerNO,
 				consumerName: usersFields[0].consumerName,
 				groupName: usersFields[0].groupName,
-				date: usersFields[0].date,
-				...miniMax,
-			});
+			};
+
+			unicDates.forEach(date => {
+				const dateFields = usersFields.filter(el => (
+					el.date === date
+				));
+				userReduce[date] = {}
+				if (dateFields.length < 1) return;
+				const miniMax = this._getMiniMaxDate(dateFields);
+				userReduce[date] = { ...miniMax };
+			})
+
+			return userReduce;
 		});
-		return res;
+		return {
+			dates: [...unicDates],
+			users
+		};
 	}
 
 	async getTimesForAllUsers({ startDate, endDate }) {

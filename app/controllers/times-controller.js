@@ -1,16 +1,15 @@
 const moment = require('moment');
 const TimesService = require('../services/times-service');
+const {
+	HTTP_STATUS_CODES,
+	DATE_FORMAT_FOR_QUERY
+} = require('../constants');
 
-const { HTTP_STATUS_CODES } = require('../constants');
 const {
 	OK,
-	NO_CONTENT,
-	UNAUTHORIZED,
 	BAD_REQUEST,
 	CONFLICT,
 } = HTTP_STATUS_CODES;
-
-const DATE_FORMAT_FOR_QUERY = 'YYYY-MM-DD';
 
 const dateValidator = ctx => {
 	let {
@@ -46,10 +45,7 @@ const dateValidator = ctx => {
 	return {
 		startDate: startDate.format(DATE_FORMAT_FOR_QUERY),
 		endDate: endDate.format(DATE_FORMAT_FOR_QUERY)
-	}
-
-	ctx.query.startDate = startDate.format(DATE_FORMAT_FOR_QUERY);
-	ctx.query.endDate = endDate.format(DATE_FORMAT_FOR_QUERY);
+	};
 }
 
 module.exports = {
@@ -90,7 +86,7 @@ module.exports = {
 		const timesService = new TimesService(ctx.app.context);
 		const data = await timesService.getTimesForAllUsers({ startDate, endDate });
 
-		if (!Array.isArray(data)) {
+		if (data === null) {
 			console.log('--- !!! No Content !!!\n');
 			body.error = {
 				noContent: 'Internal Server Error'
