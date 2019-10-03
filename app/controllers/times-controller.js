@@ -7,6 +7,7 @@ const {
 
 const {
 	OK,
+	NO_CONTENT,
 	BAD_REQUEST,
 	CONFLICT,
 } = HTTP_STATUS_CODES;
@@ -63,7 +64,7 @@ module.exports = {
 		const body = {
 			data: null,
 			errors: null,
-			response: false,
+			success: false,
 		};
 
 		const payload = dateValidator(ctx, ctx.query);
@@ -88,16 +89,16 @@ module.exports = {
 
 		if (data === null) {
 			console.log('--- !!! No Content !!!\n');
-			body.error = {
+			/* body.error = {
 				noContent: 'Internal Server Error'
 			};
-			ctx.body = body;
-			ctx.status = CONFLICT;
+			ctx.body = body; */
+			ctx.status = NO_CONTENT;
 			return;
 		}
 
 		body.data = data;
-		body.response = true;
+		body.success = true;
 
 		ctx.body = body;
 		ctx.status = OK;
