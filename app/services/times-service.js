@@ -9,14 +9,16 @@ class TimesService {
 
 	_getMiniMaxDate(data) {
 		const dates = data.map(item => item.moment);
-		const miniMax = {
-			startTime: moment.min(dates),
-			endTime: moment.max(dates),
-		};
+		const startTime = moment.min(dates);
+		const endTime = moment.max(dates);
 	
-		const diff = moment.duration(miniMax.endTime.diff(miniMax.startTime));
-		miniMax.deltaTime = `${diff.get('hours')}:${diff.get('minutes')}:${diff.get('seconds')}`
-		return miniMax;
+		const diff = moment.duration(endTime.diff(startTime));
+		const deltaTime = `${diff.get('hours')}:${diff.get('minutes')}`
+		return {
+			startTime: startTime.format('HH:mm'),
+			endTime: endTime.format('HH:mm'),
+			deltaTime
+		};
 	}
 
 	_reduceByUserAndDate(arr) {
@@ -64,7 +66,7 @@ class TimesService {
 		const data = await this.timesModel.getTimesForAllUsers({ startDate, endDate });
 
 		if (!Array.isArray(data)) {
-			return null;
+			new Trown('Data from SQL is nit Array');
 		}
 
 		return this._reduceByUserAndDate(data);

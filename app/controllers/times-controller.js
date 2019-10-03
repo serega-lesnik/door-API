@@ -67,10 +67,18 @@ module.exports = {
 			success: false,
 		};
 
-		const payload = dateValidator(ctx, ctx.query);
+		let payload;
+		try {
+			payload = dateValidator(ctx, ctx.query);
+		} catch (e) {
+			body.errors = `date validation Error: ${e.name} ${e.message}`;
+			ctx.body = body;
+			ctx.status = BAD_REQUEST;
+			return;
+		}
+		
 
 		if (ctx.errors || !payload) {
-			console.log('--- !!! Bad Request !!!\n');
 			body.errors = ctx.errors || true;
 			ctx.body = body;
 			ctx.status = BAD_REQUEST;
@@ -85,7 +93,15 @@ module.exports = {
 		console.log('<<< payload:', { startDate, endDate }, '\n');
 
 		const timesService = new TimesService(ctx.app.context);
-		const data = await timesService.getTimesForAllUsers({ startDate, endDate });
+		let data = null;
+		try {
+			data = await timesService.getTimesForAllUsers({ startDate, endDate });
+		} catch (e) {
+			body.errors = `Internal Server Error: ${e.name} ${e.message}`;
+			ctx.body = body;
+			ctx.status = CONFLICT;
+			return;
+		}
 
 		if (data === null) {
 			console.log('--- !!! No Content !!!\n');
