@@ -27,7 +27,7 @@ class TimesService {
 		const completteArr = arr.map(item => {
 			item.date = item.readDate.substring(0, 10);
 			item.moment = moment(item.readDate);
-			unicUsers.add(item.consumerNO);
+			unicUsers.add(item.consumerName);
 			unicDates.add(item.date);
 			return item;
 		});
@@ -35,10 +35,9 @@ class TimesService {
 		const usersArray = [...unicUsers].sort();
 		const users = usersArray.map(user => {
 			const usersFields = completteArr.filter(el => (
-				el.consumerNO === user
+				el.consumerName === user
 			));
 			const userReduce = {
-				consumerNO: usersFields[0].consumerNO,
 				consumerName: usersFields[0].consumerName,
 				groupName: usersFields[0].groupName,
 			};

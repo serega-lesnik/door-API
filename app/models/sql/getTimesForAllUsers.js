@@ -1,7 +1,6 @@
 module.exports = ({ startDate, endDate }) => {
 	return `
 		SELECT
-			t_b_Consumer.f_ConsumerNO AS consumerNO,
 			t_b_Consumer.f_ConsumerName AS consumerName,
 			t_b_Group.f_GroupName AS groupName,
 			t_d_CardRecord.f_ReadDate AS readDate
@@ -16,6 +15,10 @@ module.exports = ({ startDate, endDate }) => {
 			(t_d_CardRecord.f_ReadDate BETWEEN #${startDate}# AND #${endDate} 23:59:59#)
 			AND (t_d_CardRecord.f_ReaderID BETWEEN 13 AND 16)
 			AND (t_b_Consumer.f_GroupID = 7)
+		GROUP BY
+			t_b_Consumer.f_ConsumerName,
+			t_b_Group.f_GroupName,
+			t_d_CardRecord.f_ReadDate
 		ORDER BY t_d_CardRecord.f_ReadDate;
 	`;
 };
