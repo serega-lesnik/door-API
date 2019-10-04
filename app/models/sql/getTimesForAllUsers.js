@@ -15,6 +15,7 @@ module.exports = ({ startDate, endDate }) => {
 		WHERE
 			(t_d_CardRecord.f_ReadDate BETWEEN #${startDate}# AND #${endDate} 23:59:59#)
 			AND (t_d_CardRecord.f_ReaderID BETWEEN 13 AND 16)
+			AND (t_b_Consumer.f_GroupID = 7)
 		ORDER BY t_d_CardRecord.f_ReadDate;
 	`;
 };
