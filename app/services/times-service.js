@@ -13,11 +13,12 @@ class TimesService {
 		const endTime = moment.max(dates);
 	
 		const diff = moment.duration(endTime.diff(startTime));
-		const deltaTime = `${diff.get('hours')}:${diff.get('minutes')}`
+		const deltaTime = `${diff.get('hours')}:${diff.get('minutes')}`;
 		return {
 			startTime: startTime.format('HH:mm'),
 			endTime: endTime.format('HH:mm'),
-			deltaTime
+			deltaTime,
+			diff
 		};
 	}
 
@@ -31,6 +32,7 @@ class TimesService {
 			unicDates.add(item.date);
 			return item;
 		});
+		const deltaAll = moment.duration(0);
 
 		const usersArray = [...unicUsers].sort();
 		const users = usersArray.map(user => {
@@ -41,6 +43,7 @@ class TimesService {
 				consumerName: usersFields[0].consumerName,
 				groupName: usersFields[0].groupName,
 			};
+			const deltaSum = moment.duration(0);
 
 			unicDates.forEach(date => {
 				const dateFields = usersFields.filter(el => (
@@ -49,14 +52,19 @@ class TimesService {
 				userReduce[date] = {}
 				if (dateFields.length < 1) return;
 				const miniMax = this._getMiniMaxDate(dateFields);
+				deltaSum.add(miniMax.diff);
+				delete miniMax.diff;
 				userReduce[date] = { ...miniMax };
 			})
 
+			userReduce.deltaSum = `${Math.trunc(deltaSum.asHours())}:${deltaSum.get('minutes')}`;
+			deltaAll.add(deltaSum);
 			return userReduce;
 		});
 		return {
 			dates: [...unicDates],
-			users
+			users,
+			deltaAll: `${Math.trunc(deltaAll.asHours())}:${deltaAll.minutes()}`,
 		};
 	}
 
@@ -65,7 +73,7 @@ class TimesService {
 		const data = await this.timesModel.getTimesForAllUsers({ startDate, endDate });
 
 		if (!Array.isArray(data)) {
-			new Trown('Data from SQL is nit Array');
+			new Trown('Data from SQL is not Array');
 		}
 
 		return this._reduceByUserAndDate(data);
