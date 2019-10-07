@@ -12,4 +12,11 @@ module.exports = {
 	},
 
 	DATE_FORMAT_FOR_QUERY: 'YYYY-MM-DD',
+
+	STATUS_OF_COME: {
+		NONE: 0,
+		FIRST: 1,
+		LAST: 2,
+		FIRST_AND_LAST: 3,
+	},
 };
