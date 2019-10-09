@@ -40,29 +40,38 @@ Content-Type: application/json; charset=utf-8
 		"users": [
 			...
 			{
-				"consumerNO": 40,
 				"consumerName": "Чередниченко Сергей",
 				"groupName": "Офис",
 				"2019-09-30": {
-					"startTime": "2019-09-30T09:31:12.000Z",
-					"endTime": "2019-09-30T14:22:57.000Z",
-					"deltaTime": "4:51:45"
+					"startTime": "09:30",
+					"endTime": "18:37",
+					"deltaTime": "9:7",
+					"statusOfCome": 2
 				},
 				"2019-10-01": {
-					"startTime": "2019-10-01T09:40:02.000Z",
-					"endTime": "2019-10-01T15:31:51.000Z",
-					"deltaTime": "5:51:49"
+					"startTime": "06:40",
+					"endTime": "15:55",
+					"deltaTime": "9:15",
+					"statusOfCome": 1
 				},
-				"2019-10-02": {},
-				"2019-10-03": {
-					"startTime": "2019-10-03T09:00:00.000Z",
-					"endTime": "2019-10-03T18:00:00.000Z",
-					"deltaTime": "9:0:0"
+				"2019-10-02": {
+					"startTime": "09:11",
+					"endTime": "18:24",
+					"deltaTime": "9:13",
+					"statusOfCome": 0
 				},
-				"2019-10-04": {}
+				"2019-10-03": {},
+				"2019-10-04": {
+					"startTime": "06:40",
+					"endTime": "22:40",
+					"deltaTime": "16:0",
+					"statusOfCome": 3
+				}
+				"deltaSum": "43:35"
 			},
 			...
-		]
+		],
+		"deltaAll": "656:49"
 	},
 	"errors": null,
 	"success": true
