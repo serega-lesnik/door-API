@@ -66,7 +66,7 @@ Content-Type: application/json; charset=utf-8
 					"endTime": "22:40",
 					"deltaTime": "16:0",
 					"statusOfCome": 3
-				}
+				},
 				"deltaSum": "43:35"
 			},
 			...
@@ -77,7 +77,7 @@ Content-Type: application/json; charset=utf-8
 	"success": true
 }
 ```
-Поле *statusOfCome* отображает статус прихода сотрудника и может принимать следующие значения:
+Поле ***statusOfCome*** отображает статус прихода сотрудника и может принимать следующие значения:
 
 | Value | Name           | Description |
 |:-----:|:---------------|:------------|
