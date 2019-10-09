@@ -26,6 +26,7 @@ class Model {
 			return await this.db.query(query);
 		} catch (error) {
 			console.error('>>>FAIL: query to DB', error);
+			throw error;
 		}
 	}
 }

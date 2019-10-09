@@ -88,7 +88,7 @@ class TimesService {
 						userReduce[date].statusOfCome = FIRST_AND_LAST;
 					}
 				}
-			})
+			});
 
 			userReduce.deltaSum = `${Math.trunc(deltaSum.asHours())}:${deltaSum.get('minutes')}`;
 			deltaAll.add(deltaSum);
@@ -104,13 +104,19 @@ class TimesService {
 
 	async getTimesForAllUsers({ startDate, endDate }) {
 
-		const data = await this.timesModel.getTimesForAllUsers({ startDate, endDate });
+		try {
+			const data = await this.timesModel.getTimesForAllUsers({ startDate, endDate });
 
-		if (!Array.isArray(data)) {
-			new Trown('Data from SQL is not Array');
+			if (!Array.isArray(data)) {
+				new Error('Data from SQL is not Array');
+			}
+			return this._reduceByUserAndDate(data);
+		} catch (error) {
+			throw error;
 		}
+		
 
-		return this._reduceByUserAndDate(data);
+		
 	}
 }
 

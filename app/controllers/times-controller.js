@@ -97,7 +97,10 @@ module.exports = {
 		try {
 			data = await timesService.getTimesForAllUsers({ startDate, endDate });
 		} catch (e) {
-			body.errors = `Internal Server Error: ${e.name} ${e.message}`;
+			let message = '\n' + e.name;
+			message += '\n' + e.message;
+			message += (e.process && e.process.message) ? '\n' + e.process.message : '';
+			body.errors = `Internal Server Error: ${message}`;
 			ctx.body = body;
 			ctx.status = CONFLICT;
 			return;
